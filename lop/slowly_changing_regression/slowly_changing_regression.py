@@ -46,10 +46,15 @@ def generate_problem_data(
     Y = torch.zeros((num_data_points, 1), dtype=torch.float)
 
     with torch.no_grad():
-        mini_batch_size = 10000
+        mini_batch_size = flip_after
         for i in tqdm(range(int(num_data_points/mini_batch_size))):
             Y[i*mini_batch_size:(i+1)*mini_batch_size], features =\
                 target_network.predict(x=X[i*mini_batch_size:(i+1)*mini_batch_size])
+    # mkdirs
+    data_dir = '/'.join(data_file.split('/')[:-1])
+    import os
+    if not os.path.exists(data_dir):
+        os.makedirs(data_dir)
 
     data = X, Y, target_network
     with open(data_file, 'wb+') as f:

@@ -22,6 +22,7 @@ class GnT(object):
             util_type='contribution',
             loss_func=F.mse_loss,
             accumulate=False,
+            replacement_rates=[]
     ):
         super(GnT, self).__init__()
         self.device = device
@@ -47,6 +48,8 @@ class GnT(object):
         Utility of all features/neurons
         """
         self.util = [torch.zeros(self.net[i * 2].out_features).to(self.device) for i in range(self.num_hidden_layers)]
+        self.last_features_act = [torch.zeros(self.net[i * 2].out_features).to(self.device) for i in range(self.num_hidden_layers)]
+
         self.bias_corrected_util = \
             [torch.zeros(self.net[i * 2].out_features).to(self.device) for i in range(self.num_hidden_layers)]
         self.ages = [torch.zeros(self.net[i * 2].out_features).to(self.device) for i in range(self.num_hidden_layers)]
@@ -59,6 +62,8 @@ class GnT(object):
         """
         if hidden_activation == 'selu': init = 'lecun'
         self.bounds = self.compute_bounds(hidden_activation=hidden_activation, init=init)
+
+        self.replacement_rates = replacement_rates
 
     def compute_bounds(self, hidden_activation, init='kaiming'):
         if hidden_activation in ['swish', 'elu']: hidden_activation = 'relu'
@@ -86,6 +91,7 @@ class GnT(object):
 
             self.mean_feature_act[layer_idx] *= self.decay_rate
             self.mean_feature_act[layer_idx] -= - (1 - self.decay_rate) * features.mean(dim=0)
+            self.last_features_act[layer_idx] = features.abs().mean(dim=0)
             bias_corrected_act = self.mean_feature_act[layer_idx] / bias_correction
 
             current_layer = self.net[layer_idx * 2]
@@ -128,7 +134,11 @@ class GnT(object):
         """
         features_to_replace = [torch.empty(0, dtype=torch.long).to(self.device) for _ in range(self.num_hidden_layers)]
         num_features_to_replace = [0 for _ in range(self.num_hidden_layers)]
-        if self.replacement_rate == 0:
+        if self.replacement_rate == 0 and self.replacement_rates == []:
+            # update utility scores
+            for i in range(self.num_hidden_layers):
+                self.ages[i] += 1
+                self.update_utility(layer_idx=i, features=features[i])
             return features_to_replace, num_features_to_replace
         for i in range(self.num_hidden_layers):
             self.ages[i] += 1
@@ -142,7 +152,8 @@ class GnT(object):
             eligible_feature_indices = torch.where(self.ages[i] > self.maturity_threshold)[0]
             if eligible_feature_indices.shape[0] == 0:
                 continue
-            num_new_features_to_replace = self.replacement_rate*eligible_feature_indices.shape[0]
+            replacement_rate = self.replacement_rates[i] if len(self.replacement_rates) > 0 else self.replacement_rate
+            num_new_features_to_replace = replacement_rate*eligible_feature_indices.shape[0]
             self.accumulated_num_features_to_replace[i] += num_new_features_to_replace
 
             """

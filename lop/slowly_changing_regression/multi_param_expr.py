@@ -73,6 +73,22 @@ def main(arguments):
         for idx in tqdm(range(params['num_runs'])):
             new_params['data_file'] = new_params['data_dir'] + str(idx)
             new_params['env_file'] = new_params['env_data_dir'] + str(idx)
+            new_params['run_index'] = idx
+
+            # compute wandb group name: replace "{lr}" with params['step_size'] and "{decay}" with params['weight_decay']
+            new_params['wandb_group'] = new_params['wandb_group'].format(
+                lr=new_params['step_size'],
+                decay=new_params['weight_decay'],
+                layers=new_params['additional_layers'],
+                repl=new_params['replacement_rate'],
+                act=new_params['hidden_activation'],
+                rates=str(new_params['replacement_rates']),
+                util_type=new_params['util_type'],
+                run_index=idx,
+            )
+
+            # compute the wandb run name: just the run index
+            new_params['wandb_run_name'] = "run #" + str(idx)
 
             """
                 write data in config files

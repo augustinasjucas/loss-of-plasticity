@@ -25,7 +25,8 @@ class ContinualBackprop(object):
             accumulate=False,
             momentum=0,
             outgoing_random=False,
-            weight_decay=0
+            weight_decay=0,
+            replacement_rates = []
     ):
         self.net = net
 
@@ -55,6 +56,7 @@ class ContinualBackprop(object):
             loss_func=self.loss_func,
             init=init,
             accumulate=accumulate,
+            replacement_rates=replacement_rates,
         )
 
     def learn(self, x, target):
