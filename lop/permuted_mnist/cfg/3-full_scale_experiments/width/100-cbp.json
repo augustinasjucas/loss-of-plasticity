@@ -1,0 +1,49 @@
+{
+    "model_version": "CBP",
+    "_comment_1_": "List of problem/experiment parameters",
+    "num_runs": 3,
+    "num_tasks": 1100,
+    "use_gpu": 0,
+    "data_dir": "data/bp/small_net/28/",
+    "to_log": true,
+    "_comment_2_": "Learner parameters",
+    "agent": "cbp",
+    "opt": "sgd",
+    "num_features": 100,
+    "num_hidden_layers": 5,
+    "step_size": 0.005,
+    "activation": "relu",
+    "total_to_take": 10000,
+    "weight_decay": 0,
+    "util_type": "contribution",
+    "accumulate": true,
+    "replacement_rate": 0.0001,
+    "replacement_rates": [
+
+        [0.0001, 0.0001, 0.0001, 0.0001, 0.0001, 0.0001],
+        [0, 0, 0, 0, 0, 0],
+        
+        [0.0001, 0, 0, 0, 0, 0],
+        [0, 0.0001, 0, 0, 0, 0],
+        [0, 0, 0.0001, 0, 0, 0],
+        [0, 0, 0, 0.0001, 0, 0],
+        [0, 0, 0, 0, 0.0001, 0],
+        [0, 0, 0, 0, 0, 0.0001],
+        
+        [0.0001, 0, 0.0001, 0, 0.0001, 0],
+        [0, 0.0001, 0, 0.0001, 0, 0.0001],
+
+        [0.0001, 0.0001, 0, 0, 0, 0],
+        [0.0001, 0.0001, 0.0001, 0, 0, 0],
+
+        [0, 0.0001, 0.0001, 0.0001, 0.0001, 0.0001],
+        [0, 0, 0.0001, 0.0001, 0.0001, 0.0001],
+        [0, 0, 0, 0.0001, 0.0001, 0.0001]
+
+    ],
+    "wandb_group": "agent={agent}-rates={rates}-activation={activation}-layers={layers}-lr={lr}-repl={repl}-decay={decay}-width={width}",
+    "wandb_entity": "augustinasj",
+    "wandb_project": "mnist-after-hyperparam",
+    "compute_scores": true
+
+}

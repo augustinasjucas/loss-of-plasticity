@@ -1,0 +1,32 @@
+{
+    "model_version": "CBP",
+    
+      "_comment_1_": "List of problem/experiment parameters",
+      "num_runs":  3,
+      "num_tasks": 1100,
+      "use_gpu": 0,
+      "data_dir": "data/bp/small_net/",
+      "to_log": true,
+    
+      "_comment_2_": "Learner parameters",
+      "agent": ["cbp", "bp", "l2"],
+      "opt": "sgd",
+      "num_features": [20, 50, 100, 150, 200],
+      "num_hidden_layers": 5,
+      "step_size": [0.01, 0.005, 0.001, 0.0005],
+      "activation": "relu",
+      "total_to_take": 10000,
+    
+      "weight_decay": [0, 1e-2, 1e-3, 1e-4],
+    
+      "util_type": "contribution",
+      "accumulate": true,
+      "replacement_rate": [0, 1e-3, 1e-4, 1e-5],
+      "replacement_rates": [[]],
+
+      "wandb_group": "agent={agent}-activation={activation}-layers={layers}-lr={lr}-repl={repl}-decay={decay}-width={width}",
+      "wandb_entity": "augustinasj",
+      "wandb_project": "mnist-hyperparam-db",
+      "compute_scores": true
+    }
+    
