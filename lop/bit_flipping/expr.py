@@ -3,7 +3,6 @@ import json
 import pickle
 import argparse
 from lop.nets.ffnn import FFNN
-from lop.nets.linear import MyLinear
 from lop.algos.bp import Backprop
 from lop.algos.cbp import ContinualBackprop
 from lop.utils.miscellaneous import *
@@ -68,17 +67,12 @@ def expr(params: {}, index):
     if "init" in params.keys():
         init = params["init"]
 
-    if agent_type == 'linear':
-        net = MyLinear(
-            input_size=num_inputs,
-        )
-    else:
-        net = FFNN(
-            input_size=num_inputs,
-            num_features=num_features,
-            hidden_activation=hidden_activation,
-            additional_layers=additional_layers,
-        )
+    net = FFNN(
+        input_size=num_inputs,
+        num_features=num_features,
+        hidden_activation=hidden_activation,
+        additional_layers=additional_layers,
+    )
 
     if agent_type == 'bp' or agent_type == 'linear' or agent_type == 'l2':
         

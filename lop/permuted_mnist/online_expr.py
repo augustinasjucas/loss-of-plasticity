@@ -7,7 +7,6 @@ import numpy as np
 from tqdm import tqdm
 from lop.algos.bp import Backprop
 from lop.algos.cbp import ContinualBackprop
-from lop.nets.linear import MyLinear
 from torch.nn.functional import softmax
 from lop.nets.deep_ffnn import DeepFFNN
 from lop.utils.miscellaneous import nll_accuracy, compute_matrix_rank_summaries
@@ -16,7 +15,7 @@ import os
 import time
 import torch.nn as nn
 from lop.algos.hessian import compute_effective_hessian_ranks
-from lop.slowly_changing_regression.expr import mean_ignore_infs
+from lop.bit_flipping.expr import mean_ignore_infs
 
 # Can be changed if needed
 WANDB_LOGS_DIR = '/tmp/ajucas/wandb-mnist-continued/'
@@ -175,13 +174,6 @@ def online_expr(params: {}, index):
             param_cnt += layer.bias.numel()
 
     print("Total number of parameters: ", param_cnt)
-
-
-    if agent_type == 'linear':
-        net = MyLinear(
-            input_size=input_size, num_outputs=classes_per_task
-        )
-        net.layers_to_log = []
 
     if agent_type in ['bp', 'linear', "l2"]:
         if compute_scores:

@@ -2,8 +2,6 @@ import sys
 import torch
 from math import sqrt
 import torch.nn.functional as F
-from lop.utils.AdamGnT import AdamGnT
-
 
 class GnT(object):
     """
@@ -33,8 +31,6 @@ class GnT(object):
 
         self.opt = opt
         self.opt_type = 'sgd'
-        if isinstance(self.opt, AdamGnT):
-            self.opt_type = 'adam'
 
         """
         Define the hyper-parameters of the algorithm

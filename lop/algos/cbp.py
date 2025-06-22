@@ -1,6 +1,5 @@
 from torch import optim
 from lop.algos.gnt import GnT
-from lop.utils.AdamGnT import AdamGnT
 import torch.nn.functional as F
 
 
@@ -33,8 +32,6 @@ class ContinualBackprop(object):
         # define the optimizer
         if opt == 'sgd':
             self.opt = optim.SGD(self.net.parameters(), lr=step_size, momentum=momentum, weight_decay=weight_decay)
-        elif opt == 'adam':
-            self.opt = AdamGnT(self.net.parameters(), lr=step_size, betas=(beta, beta_2), weight_decay=weight_decay)
 
         # define the loss function
         self.loss_func = {'nll': F.cross_entropy, 'mse': F.mse_loss}[loss]
