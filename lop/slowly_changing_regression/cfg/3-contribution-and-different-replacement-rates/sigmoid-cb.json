@@ -1,0 +1,59 @@
+{
+"model_version": "",
+
+    "_comment_1_": "List of problem/experiment parameters",
+    "gen_prob_data": false,
+    "num_runs":  10,
+    "num_inputs": 20,
+    "num_data_points": 3e6,
+    "data_dir": "data/results/further_experiment/sigmoid-cb/",
+    "env_data_dir": "data/env_data/scr/",
+    "flip_after": 2500,
+    "num_target_features": 500,
+    "num_flipping_bits": 15,
+    "to_log_features": false,
+    "beta": 0.7,
+
+    "_comment_2_": "Learner parameters",
+    "agent": "cbp",
+    "num_features": 5,
+    "hidden_activation": "sigmoid",
+    "util_type": ["contribution", "adaptable_contribution"],
+    "opt": "sgd",
+    "step_size": [0.005, 0.001],
+    "replacement_rate": 1e-4,
+    "decay_rate": 0.99,
+    "maturity_threshold": 100,
+    "weight_decay": 0,
+    "additional_layers": 5,
+    "replacement_rates": [
+        [1e-4, 0, 0, 0, 0, 0],
+        [0, 1e-4, 0, 0, 0, 0],
+        [0, 0, 1e-4, 0, 0, 0],
+        [0, 0, 0, 1e-4, 0, 0],
+        [0, 0, 0, 0, 1e-4, 0],
+        [0, 0, 0, 0, 0, 1e-4],
+
+        [1e-4, 1e-4, 1e-4, 1e-4, 1e-4, 1e-4],
+
+        [0, 0, 0, 0, 0, 0],
+
+        [1e-4, 1e-4, 0, 0, 0, 0],
+        [0, 1e-4, 1e-4, 0, 0, 0],
+        [0, 0, 1e-4, 1e-4, 0, 0],
+        [0, 0, 0, 1e-4, 1e-4, 0],
+        [0, 0, 0, 0, 1e-4, 1e-4]
+    ],
+
+    "compute_scores": true, 
+
+
+
+    "wandb_group": "{act}-cbp-layers={layers}-lr={lr}-replacement={repl}",
+    "wandb_entity": "augustinasj",
+    "wandb_project": "slow_regression-further"
+
+
+}
+
+
