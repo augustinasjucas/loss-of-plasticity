@@ -1,15 +1,14 @@
-# Layerwise Perspective into Continual Backprop
+# Layerwise Perspective into Continual Backpropagation
 
 ## Contents
 
 - [Overview](#overview)
-- [Repository Contents](#repo-contents)
-- [Installation Guide](#installation-guide)
-- [License](./LICENSE)
-- [Citation](./citation.bib)
+- [Repository Contents](#repository-contents)
+- [System Requirements](#system-requirements)
+- [Installation Guide (Linux)](#installation-guide-linux)
 
 ## Overview
-This repository contains the code for running experiments and analyzing data for the Bachelor thesis titled *"Layerwise Perspective into Continual Backprop: Replacing the First Layer is All You Need"*, authored by **Augustinas Jučas**.
+This repository contains the code for running experiments and analyzing data for the Bachelor thesis titled *"Layerwise Perspective into Continual Backpropagation: Replacing the First Layer is All You Need"*, authored by **Augustinas Jučas**.
 
 ### Thesis Information
 - **Institution:** Delft University of Technology

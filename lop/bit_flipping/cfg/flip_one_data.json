@@ -3,7 +3,7 @@
   
     "_comment_1_": "List of problem/experiment parameters",
     "gen_prob_data": true,
-    "num_runs":  10,
+    "num_runs":  15,
     "num_inputs": 20,
     "num_data_points": 1e7,
     "data_dir": "data/results/first_experiment/bp/",
