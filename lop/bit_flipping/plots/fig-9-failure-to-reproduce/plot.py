@@ -100,6 +100,7 @@ def get_group_data(groups):
             errs = extract_binned_errors(run, METRIC, STEP_METRIC, MAX_STEP, BIN_SIZE)
             all_binned.append(errs)
         group_data[group] = np.vstack(all_binned)
+    return group_data
 
 if __name__ == '__main__':
 

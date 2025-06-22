@@ -26,6 +26,6 @@
   
   "wandb_group": "cbp-layers={layers}-lr={lr}-repl={repl}",
   "wandb_entity": "augustinasj",
-  "wandb_project": "sanity-check",
+  "wandb_project": "mnist-sanity-check",
   "compute_scores": true
 }
