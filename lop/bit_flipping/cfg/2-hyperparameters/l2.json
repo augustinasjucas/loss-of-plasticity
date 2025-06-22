@@ -31,6 +31,6 @@
 
     "wandb_group": "{act}-l2-layers={layers}-lr={lr}-decay={decay}",
     "wandb_entity": "augustinasj",
-    "wandb_project": "slow_regression-final"
+    "wandb_project": "slow_regression_final"
 }
     

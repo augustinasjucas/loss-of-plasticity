@@ -33,7 +33,7 @@
 
     "wandb_group": "{act}-cbp-layers={layers}-lr={lr}-replacement={repl}",
     "wandb_entity": "augustinasj",
-    "wandb_project": "slow_regression-final"
+    "wandb_project": "slow_regression_final"
 
 
 }
